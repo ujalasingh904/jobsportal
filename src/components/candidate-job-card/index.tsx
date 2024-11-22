@@ -19,8 +19,7 @@ export default function CandidateJobCard({ jobItem, profileInfo ,jobApplications
     
 
     async function handleJobApply() {
-
-        // console.log(jobApplications?.jobID,jobItem?._id)
+ 
         await createJobApplicationAction({
             recruiterUserID: jobItem?.recruiterId,
             name: profileInfo?.candidateInfo?.name,
@@ -60,7 +59,7 @@ export default function CandidateJobCard({ jobItem, profileInfo ,jobApplications
                                         jobApplications.map((item:any)=>item.jobID).includes(jobItem?._id)   
                                     }
                                     onClick={handleJobApply}
-                                    className=" flex h-11 items-center justify-center px-5 mt-8">{
+                                    className="disabled:opacity-65 flex h-11 items-center justify-center px-5 mt-8">{
                                         jobApplications.map((item:any)=>item.jobID).includes(jobItem?._id) ? 'Applied' : 'Apply Now'
                                     }</Button>
 

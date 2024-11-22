@@ -63,7 +63,11 @@ export default function CommonForm({ action,  buttonText, isBtndisabled, formCon
     return (
         <form action={action}>
             {
-                formControls.map((control: any) => renderInputByComponentType(control))
+                formControls.map((control, index) => (
+                    <div key={index}>
+                        {renderInputByComponentType(control)}
+                    </div>
+                ))
             }
             <div>
                 <Button
