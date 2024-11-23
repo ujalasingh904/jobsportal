@@ -1,6 +1,12 @@
-import { getCandidateDetailsByIDAction } from "@/actions";
+import { getCandidateDetailsByIDAction, updateJobApplicationStatusAction } from "@/actions";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent } from "../ui/dialog";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseClient = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_API_KEY || ''
+)
 
 export default function CandidateList({ currentCandidateDetails, setCurrentCandidateDetails, jobApplications, showCurrentCandidateDetailsModal, setShowCurrentCandidateDetailsModal }: any) {
 
@@ -13,7 +19,29 @@ export default function CandidateList({ currentCandidateDetails, setCurrentCandi
         }
     }
 
+    function handlePreviewResume() {
+        const { data } = supabaseClient.storage.from("job-portal-public")
+            .getPublicUrl(currentCandidateDetails?.candidateInfo?.resume)
 
+        const a = document.createElement("a");
+        a.href = data?.publicUrl;
+        a.setAttribute("download", "resume");
+        a.setAttribute("target", "_blank");
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    async function handleUpdateJobStatus(getCurrentStatus: any) {
+        let cpyJobApplications = [...jobApplications];
+        const indexOfCurrentJobApplicant = cpyJobApplications.findIndex((item: any) => item.candidateUserID === currentCandidateDetails?.userId);
+
+        const jobApplicantsToUpdate = {
+            ...cpyJobApplications[indexOfCurrentJobApplicant],
+            status: cpyJobApplications[indexOfCurrentJobApplicant].status.concat(getCurrentStatus)
+        }
+        await updateJobApplicationStatusAction(jobApplicantsToUpdate, "/jobs")
+
+    }
 
     return (
         <>
@@ -76,8 +104,8 @@ export default function CandidateList({ currentCandidateDetails, setCurrentCandi
                             <div className="flex flex-wrap items-center gap-4 ">
                                 {currentCandidateDetails?.candidateInfo?.previousCompanies
                                     .split(",")
-                                    .map((skillItem: any) => (
-                                        <div className="w-[100px] dark:bg-white flex justify-center items-center h-[35px] bg-black rounded-[4px]">
+                                    .map((skillItem: any, index: any) => (
+                                        <div key={index} className="w-[100px] dark:bg-white flex justify-center items-center h-[35px] bg-black rounded-[4px]">
                                             <h2 className="text-[13px]  dark:text-black font-medium text-white">
                                                 {skillItem}
                                             </h2>
@@ -88,8 +116,8 @@ export default function CandidateList({ currentCandidateDetails, setCurrentCandi
                         <div className="flex flex-wrap gap-4 mt-6">
                             {currentCandidateDetails?.candidateInfo?.skills
                                 .split(",")
-                                .map((skillItem: any) => (
-                                    <div className="w-[100px] dark:bg-white flex justify-center items-center h-[35px] bg-black rounded-[4px]">
+                                .map((skillItem: any, index: any) => (
+                                    <div key={index} className="w-[100px] dark:bg-white flex justify-center items-center h-[35px] bg-black rounded-[4px]">
                                         <h2 className="text-[13px] dark:text-black font-medium text-white">
                                             {skillItem}
                                         </h2>
@@ -99,42 +127,13 @@ export default function CandidateList({ currentCandidateDetails, setCurrentCandi
                     </div>
                     <div className="flex gap-3">
                         <Button
-                            // onClick={handlePreviewResume}
+                            onClick={handlePreviewResume}
                             className=" flex h-11 items-center justify-center px-5"
                         >
                             Resume
                         </Button>
                         <Button
-                            // onClick={() => handleUpdateJobStatus("selected")}
-                            className=" disabled:opacity-65 flex h-11 items-center justify-center px-5"
-                            disabled={
-                                jobApplications
-                                    .find(
-                                        (item) =>
-                                            item.candidateUserID === currentCandidateDetails?.userId
-                                    )
-                                    ?.status.includes("selected") ||
-                                    jobApplications
-                                        .find(
-                                            (item) =>
-                                                item.candidateUserID === currentCandidateDetails?.userId
-                                        )
-                                        ?.status.includes("rejected")
-                                    ? true
-                                    : false
-                            }
-                        >
-                            {jobApplications
-                                .find(
-                                    (item:any) =>
-                                        item.candidateUserID === currentCandidateDetails?.userId
-                                )
-                                ?.status.includes("selected")
-                                ? "Selected"
-                                : "Select"}
-                        </Button>
-                        <Button
-                            // onClick={() => handleUpdateJobStatus("rejected")}
+                            onClick={() => handleUpdateJobStatus("selected")}
                             className=" disabled:opacity-65 flex h-11 items-center justify-center px-5"
                             disabled={
                                 jobApplications
@@ -155,7 +154,36 @@ export default function CandidateList({ currentCandidateDetails, setCurrentCandi
                         >
                             {jobApplications
                                 .find(
-                                    (item:any) =>
+                                    (item: any) =>
+                                        item.candidateUserID === currentCandidateDetails?.userId
+                                )
+                                ?.status.includes("selected")
+                                ? "Selected"
+                                : "Select"}
+                        </Button>
+                        <Button
+                            onClick={() => handleUpdateJobStatus("rejected")}
+                            className=" disabled:opacity-65 flex h-11 items-center justify-center px-5"
+                            disabled={
+                                jobApplications
+                                    .find(
+                                        (item: any) =>
+                                            item.candidateUserID === currentCandidateDetails?.userId
+                                    )
+                                    ?.status.includes("selected") ||
+                                    jobApplications
+                                        .find(
+                                            (item: any) =>
+                                                item.candidateUserID === currentCandidateDetails?.userId
+                                        )
+                                        ?.status.includes("rejected")
+                                    ? true
+                                    : false
+                            }
+                        >
+                            {jobApplications
+                                .find(
+                                    (item: any) =>
                                         item.candidateUserID === currentCandidateDetails?.userId
                                 )
                                 ?.status.includes("rejected")

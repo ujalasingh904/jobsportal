@@ -42,28 +42,54 @@ export async function fetchJobsForCandidateAction() {
     return JSON.parse(JSON.stringify(result));
 }
 
-export async function createJobApplicationAction(data:any, pathToRevalidate:any) {
+export async function createJobApplicationAction(data: any, pathToRevalidate: any) {
     await connecToDb();
     await Application.create(data)
     revalidatePath(pathToRevalidate)
 }
 
-export async function fetchJobApplicationForCandidate(candidateId:any) {
+export async function fetchJobApplicationForCandidate(candidateId: any) {
     await connecToDb();
     const result = await Application.find({ candidateUserID: candidateId });
     return JSON.parse(JSON.stringify(result));
 }
 
-export async function fetchJobApllicationForRecruiter(recruiterId:any) {
+export async function fetchJobApllicationForRecruiter(recruiterId: any) {
     await connecToDb();
     const result = await Application.find({ recruiterUserID: recruiterId });
     return JSON.parse(JSON.stringify(result));
 }
 
-export async function getCandidateDetailsByIDAction(currentCandidateID:any){
+export async function getCandidateDetailsByIDAction(currentCandidateID: any) {
     await connecToDb();
     const result = await Profile.findOne({ userId: currentCandidateID });
     return JSON.parse(JSON.stringify(result));
+}
+
+export async function updateJobApplicationStatusAction(data: any, pathToRevalidate: any) {
+    await connecToDb();
+
+    const { recruiterUserID,
+        name,
+        email,
+        candidateUserID,
+        status,
+        jobID,
+        _id,
+        jobAppliedDate,
+    } = data
+
+    await Application.findOneAndUpdate({ _id }, {
+        recruiterUserID,
+        name,
+        email,
+        candidateUserID,
+        status,
+        jobID,
+        jobAppliedDate,
+    }, { new: true })
+    
+    revalidatePath(pathToRevalidate)
 }
 
 
