@@ -32,8 +32,7 @@ export default function PostNewJob({ profileInfo, user }: any) {
         })
         setshowJobDialog(false)
     }
-
-    console.log(jobFormData)
+ 
 
     return (
         <div className="">

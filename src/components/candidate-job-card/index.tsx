@@ -15,7 +15,7 @@ export default function CandidateJobCard({ jobItem, profileInfo ,jobApplications
 
     const [showJobDetailsDrawer, setShowJobDetailsDrawer] = useState(false)
 
-    console.log(jobApplications.map((item: any) => item.jobID));
+    
     
 
     async function handleJobApply() {

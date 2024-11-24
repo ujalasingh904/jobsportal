@@ -10,6 +10,9 @@ import { UserButton } from "@clerk/nextjs";
 
 export default function Header({ user , profileInfo }: any) {
 
+    const value = JSON.parse(profileInfo?.value)
+    
+
     const menuItems = [
         {
             label: "Home",
@@ -29,7 +32,7 @@ export default function Header({ user , profileInfo }: any) {
         {
             label: "Activity",
             path: "/activity",
-            show: profileInfo?.role === 'candidate'
+            show: value?.role === 'candidate'
         },
         {
             label: "Jobs",

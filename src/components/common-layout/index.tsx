@@ -17,7 +17,7 @@ export async function CommonLayout({ children }: CommonLayoutProps) {
         <div className="mx-auto max-w-7xl p-6 lg:px-8">
             {/* header component */}
             <Header
-                profileInfo={profileInfo}
+                profileInfo={profileInfo} 
                 user={JSON.parse(JSON.stringify(user))}
             />
 
