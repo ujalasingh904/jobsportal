@@ -77,6 +77,7 @@ export default function Header({ user , profileInfo }: any) {
                                         <Link
                                             key={index}
                                             href={menuItem.path}
+                                            onClick={()=>sessionStorage.removeItem('filterParams')}
                                             className="flex w-full items-center py-2 text-lg font-semibold "
                                         >
                                             {menuItem.label}

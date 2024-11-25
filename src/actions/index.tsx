@@ -1,4 +1,5 @@
 "use server"
+
 import connecToDb from "@/database";
 import Application from "@/models/application";
 import Job from "@/models/job";
@@ -34,11 +35,14 @@ export async function fetchJobsForRecuriterAction(id: any) {
     return JSON.parse(JSON.stringify(result));
 }
 
-export async function fetchJobsForCandidateAction() {
+export async function fetchJobsForCandidateAction(filterParams: { [key: string]: string } = {}) {
     await connecToDb();
-    const result = await Job.find();
+    let updatedParams: { [key: string]: { $in: string[] } } = {};
+    Object.keys(filterParams).forEach((filterKey) => {
+        updatedParams[filterKey] = { $in: filterParams[filterKey].split(",") }
+    })
+    const result = await Job.find(filterParams && Object.keys(filterParams).length > 0 ? updatedParams : {});
 
-    // return JSON.parse(JSON.stringify(result));
     return JSON.parse(JSON.stringify(result));
 }
 
@@ -88,7 +92,32 @@ export async function updateJobApplicationStatusAction(data: any, pathToRevalida
         jobID,
         jobAppliedDate,
     }, { new: true })
-    
+
+    revalidatePath(pathToRevalidate)
+}
+
+export async function createFilterCategoryAction() {
+    await connecToDb();
+    const result = await Job.find({});
+    return JSON.parse(JSON.stringify(result));
+}
+
+export async function updateProfileAction(data: any, pathToRevalidate: any) {
+    await connecToDb();
+    const { recruiterInfo, candidateInfo, memberShipEndDate, memberShipStartDate, memberShipType, _id, userId, role, email, isPremiumUser } = data;
+
+    await Profile.findOneAndUpdate({ _id }, {
+        recruiterInfo,
+        candidateInfo,
+        memberShipEndDate,
+        memberShipStartDate,
+        memberShipType,
+        userId,
+        role,
+        email,
+        isPremiumUser
+    }, { new: true })
+
     revalidatePath(pathToRevalidate)
 }
 

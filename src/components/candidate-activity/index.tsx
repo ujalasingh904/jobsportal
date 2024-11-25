@@ -8,8 +8,7 @@ export default function CandidateActivity({ jobList, jobApplicants }: any) {
 
     const uniqueStatusArray = [...new Set(jobApplicants.map((item: any) => item.status).flat(1)
     )];
-
-    console.log(uniqueStatusArray);
+ 
 
     return (
         <div className="mx-auto max-w-7xl">
