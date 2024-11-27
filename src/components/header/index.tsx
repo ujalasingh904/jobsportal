@@ -90,7 +90,7 @@ export default function Header({ user , profileInfo }: any) {
                     </SheetContent>
                 </Sheet>
 
-                <Link className="hidden lg:flex mr-6" href={'/'}>
+                <Link className="hidden font-bold text-4xl lg:flex mr-6" href={'/'}>
                     JobsWallah
                 </Link>
                 <nav className="ml-auto hidden lg:flex gap-6">
@@ -100,7 +100,7 @@ export default function Header({ user , profileInfo }: any) {
                                 <Link
                                     key={index}
                                     href={menuItem.path}
-                                    className="group inline-flex h-9 w-max items-center rounded-md bg-white px-4 py-2 text-sm font-medium"
+                                    className="group inline-flex h-9 w-max items-center rounded-md bg-white px-4 py-2 font-[550] text-sm"
                                 >
                                     {menuItem.label}
                                 </Link>

@@ -1,4 +1,5 @@
 import { fetchProfileAction } from "@/actions";
+import HomepageButtonControls from "@/components/homepage-button-controls";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -25,17 +26,17 @@ export default async function page() {
                             Build your best job community starting from here.
                         </h1>
                         <div className="w-full mt-6 flex items-center text-white justify-start gap-2">
-                            {/* <HomepageButtonControls
+                            <HomepageButtonControls
                                 user={JSON.parse(JSON.stringify(user))}
                                 profileInfo={profileInfo}
-                            /> */}
+                            />
                         </div>
                     </div>
                 </section>
                 <section className="relative w-full lg:w-[50%] flex items-center justify-end">
                     <img
                         src="https://utfs.io/f/4c9f7186-8ad0-4680-aece-a5abea608705-k6t10e.png"
-                        alt="Hero"
+                        alt="Jobs Portal"
                         className="h-full w-full object-contain z-10"
                     />
                 </section>

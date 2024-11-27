@@ -254,16 +254,16 @@ export const membershipPlans = [
   {
     heading: "Tier 1",
     price: 100,
-    type: "basic",
+    type: "Basic",
   },
   {
     heading: "Tier 2",
     price: 1000,
-    type: "teams",
+    type: "Teams",
   },
   {
     heading: "Tier 3",
     price: 5000,
-    type: "enterprise",
+    type: "Enterprise",
   },
 ];

@@ -8,14 +8,14 @@ import { postNewJobAction } from "@/actions";
 
 export default function PostNewJob({ profileInfo, user }: any) {
     const [showJobDialog, setshowJobDialog] = useState(false)
-    const [jobFormData, setJobFormData] = useState({
+    const [jobFormData, setJobFormData] = useState<any>({
         ...initialPostNewJobFormData,
         companyName: profileInfo?.recruiterInfo?.companyName,
     })
 
     function handlePostNewBtnValid() {
         return Object.keys(jobFormData).every(
-            (control) => jobFormData[control].trim() !== ""
+            (control) => jobFormData[control]?.trim() !== ""
         );
     }
 
@@ -32,7 +32,7 @@ export default function PostNewJob({ profileInfo, user }: any) {
         })
         setshowJobDialog(false)
     }
- 
+
 
     return (
         <div className="">
@@ -59,7 +59,7 @@ export default function PostNewJob({ profileInfo, user }: any) {
                                 buttonText={'Add'}
                                 formData={jobFormData}
                                 setFormData={setJobFormData}
-                                isBtndisabled={!handlePostNewBtnValid()} 
+                                isBtndisabled={!handlePostNewBtnValid()}
                             />
                         </div>
                     </DialogHeader>

@@ -1,11 +1,12 @@
+
 import { createFilterCategoryAction, fetchJobApllicationForRecruiter, fetchJobApplicationForCandidate, fetchJobsForCandidateAction, fetchJobsForRecuriterAction, fetchProfileAction } from "@/actions";
 import JobListing from "@/components/job-listing";
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server"; 
 
 export default async function JobsPage({ searchParams }: any) {
     
     
-    const user = await currentUser();
+    const user = await currentUser(); 
     const profileInfo = await fetchProfileAction(user?.id)
 
     const jobList = profileInfo?.role === 'candidate' ? await fetchJobsForCandidateAction(searchParams) :
@@ -15,6 +16,9 @@ export default async function JobsPage({ searchParams }: any) {
         fetchJobApplicationForCandidate(user?.id) : await fetchJobApllicationForRecruiter(user?.id)
 
     const fetchFilterCategories = await createFilterCategoryAction()
+
+    
+    
 
     return (
         <JobListing

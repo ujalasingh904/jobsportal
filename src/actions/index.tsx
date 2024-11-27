@@ -6,6 +6,8 @@ import Job from "@/models/job";
 import Profile from "@/models/profile";
 import { revalidatePath } from "next/cache";
 
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string)
 
 
 export async function createProfileAction(formData: any, pathToRevalidate: any) {
@@ -119,6 +121,40 @@ export async function updateProfileAction(data: any, pathToRevalidate: any) {
     }, { new: true })
 
     revalidatePath(pathToRevalidate)
+}
+
+export async function createPriceIdAction(data: any) {
+    const session = await stripe.prices.create({
+        currency: "inr",
+        unit_amount: data?.amount * 100,
+        recurring: {
+            interval: "year",
+        },
+        product_data: {
+            name: "Premium plan"
+        },
+    });
+
+    return {
+        success: true,
+        id: session?.id
+    };
+}
+
+export async function createStripePaymentAction(data: any) {
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: data?.lineItems,
+        mode: 'subscription', 
+        billing_address_collection: "required",  
+        success_url: "http://localhost:3000/membership" + "?status=success",
+        cancel_url: "http://localhost:3000/membership" + "?status=cancel",
+    });
+
+    return {
+        success: true,
+        id: session?.id
+    };
 }
 
 

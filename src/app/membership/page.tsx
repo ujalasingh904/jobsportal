@@ -1,12 +1,16 @@
-import React from 'react';
+import { fetchProfileAction } from "@/actions"; 
+import Membership from "@/components/membershipComponent";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-const MembershipPage: React.FC = () => {
+export default async function MembershipPage() {
+    const user = await currentUser();
+    const profileInfo = await fetchProfileAction(user?.id)
+    if(!profileInfo) redirect('/onboard')
+
     return (
-        <div>
-            <h1>Membership Page</h1>
-            <p>Welcome to the membership page. Here you can find information about our membership plans and benefits.</p>
-        </div>
-    );
-};
-
-export default MembershipPage;
+        <Membership  
+            profileInfo={profileInfo}
+        />
+    )
+}

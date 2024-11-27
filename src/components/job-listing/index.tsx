@@ -115,7 +115,7 @@ export default function JobListing({ user, profileInfo, jobList, jobApplications
                                         ))
                                     }
                                 </Menubar>
-                            ) : <PostNewJob profileInfo={profileInfo} user={user}
+                            ) : <PostNewJob jobList={jobList} profileInfo={profileInfo} user={user}
                             />
                     }
                 </div>
