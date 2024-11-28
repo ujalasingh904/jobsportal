@@ -3,14 +3,16 @@
 import Link from "next/link";
 import { Button } from "../ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
-import { AlignJustify } from 'lucide-react';
+import { AlignJustify, Moon } from 'lucide-react';
 import { UserButton } from "@clerk/nextjs";
+import { useTheme } from "next-themes";
 
 
 
-export default function Header({ user , profileInfo }: any) {
+export default function Header({ user, profileInfo }: any) {
 
     const value = JSON.parse(profileInfo?.value)
+    const { theme, setTheme } = useTheme()
     
 
     const menuItems = [
@@ -32,6 +34,16 @@ export default function Header({ user , profileInfo }: any) {
         {
             label: "Activity",
             path: "/activity",
+            show: value?.role === 'candidate'
+        },
+        {
+            label: "Feed",
+            path: "/feed",
+            show: user
+        },
+        {
+            label: "Companies",
+            path: "/companies",
             show: value?.role === 'candidate'
         },
         {
@@ -77,7 +89,7 @@ export default function Header({ user , profileInfo }: any) {
                                         <Link
                                             key={index}
                                             href={menuItem.path}
-                                            onClick={()=>sessionStorage.removeItem('filterParams')}
+                                            onClick={() => sessionStorage.removeItem('filterParams')}
                                             className="flex w-full items-center py-2 text-lg font-semibold "
                                         >
                                             {menuItem.label}
@@ -85,6 +97,11 @@ export default function Header({ user , profileInfo }: any) {
                                     ) : null
                                 )
                             }
+                            <Moon
+                                className="h-6 w-6 cursor-pointer mb-4"
+                                onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                                fill={theme === 'dark' ? 'light' : 'dark'}
+                            />
                             <UserButton afterSignOutUrl="/" />
                         </div>
                     </SheetContent>
@@ -93,20 +110,25 @@ export default function Header({ user , profileInfo }: any) {
                 <Link className="hidden font-bold text-4xl lg:flex mr-6" href={'/'}>
                     JobsWallah
                 </Link>
-                <nav className="ml-auto hidden lg:flex gap-6">
+                <nav className="ml-auto hidden   lg:flex gap-6 items-center">
                     {
                         menuItems.map((menuItem, index) =>
                             menuItem.show ? (
                                 <Link
                                     key={index}
                                     href={menuItem.path}
-                                    className="group inline-flex h-9 w-max items-center rounded-md bg-white px-4 py-2 font-[550] text-sm"
+                                    className="group inline-flex h-9 w-max items-center rounded-md dark:text-white px-4 py-2 font-[550] text-sm"
                                 >
                                     {menuItem.label}
                                 </Link>
                             ) : null
                         )
                     }
+                    <Moon
+                                className="h-6 w-6 cursor-pointer"
+                                onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+                                fill={theme === 'dark' ? 'white' : 'black'}
+                            />
                     <UserButton afterSignOutUrl="/" />
                 </nav>
 

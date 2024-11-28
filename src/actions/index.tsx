@@ -2,6 +2,7 @@
 
 import connecToDb from "@/database";
 import Application from "@/models/application";
+import Feed from "@/models/feed";
 import Job from "@/models/job";
 import Profile from "@/models/profile";
 import { revalidatePath } from "next/cache";
@@ -145,8 +146,8 @@ export async function createStripePaymentAction(data: any) {
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: data?.lineItems,
-        mode: 'subscription', 
-        billing_address_collection: "required",  
+        mode: 'subscription',
+        billing_address_collection: "required",
         success_url: "http://localhost:3000/membership" + "?status=success",
         cancel_url: "http://localhost:3000/membership" + "?status=cancel",
     });
@@ -157,4 +158,27 @@ export async function createStripePaymentAction(data: any) {
     };
 }
 
+export async function createFeedPostAction(data: any, pathToRevalidate: any) {
+    await connecToDb();
+    await Feed.create(data)
+    revalidatePath(pathToRevalidate)
+}
 
+export async function fetchAllFeedPostsAction() {
+    await connecToDb();
+    const result = await Feed.find({});
+    return JSON.parse(JSON.stringify(result));
+}
+
+export async function updateFeedPostAction(data: any, pathToRevalidate: any) {
+    await connecToDb();
+    const { userId, userName, message, image, likes, _id } = data;
+
+    await Feed.findOneAndUpdate(
+        { _id },
+        { userId, userName, message, image, likes },
+        { new: true }
+    )
+
+    revalidatePath(pathToRevalidate)
+}

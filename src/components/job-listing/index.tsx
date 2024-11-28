@@ -105,7 +105,7 @@ export default function JobListing({ user, profileInfo, jobList, jobApplications
                                                                     ? "bg-black dark:bg-white"
                                                                     : ""
                                                                     } `} />
-                                                                <Label className="ml-3 cursor-pointer text-sm text-gray-600" >{option}</Label>
+                                                                <Label className="ml-3 cursor-pointer text-sm text-gray-600 dark:text-white" >{option}</Label>
                                                             </MenubarItem>
                                                         ))
                                                     }

@@ -5,9 +5,11 @@ import { initialPostNewJobFormData, postNewJobFormControls } from "@/utils";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import CommonForm from "../common-form";
 import { postNewJobAction } from "@/actions";
+import { useToast } from "@/hooks/use-toast";
 
-export default function PostNewJob({ profileInfo, user }: any) {
+export default function PostNewJob({ profileInfo, user, jobList }: any) {
     const [showJobDialog, setshowJobDialog] = useState(false)
+    const { toast } = useToast();
     const [jobFormData, setJobFormData] = useState<any>({
         ...initialPostNewJobFormData,
         companyName: profileInfo?.recruiterInfo?.companyName,
@@ -33,11 +35,40 @@ export default function PostNewJob({ profileInfo, user }: any) {
         setshowJobDialog(false)
     }
 
+    function handleAddNewJob() {
+
+        if (!profileInfo?.isPremiumUser && jobList.length >= 2) {
+            toast({
+                variant:'destructive',
+                title: "You have reached the limit of job posting",
+                description: "please opt for premium plan to post more jobs",
+            })
+            return;
+        }
+        else if (profileInfo?.isPremiumUser && jobList.length >= 5 && profileInfo?.membershipType === 'Basic') {
+            toast({
+                variant:'destructive',
+                title: "You have reached the limit of job posting",
+                description: "please opt for premium plan to post more jobs",
+            })
+            return;
+        }
+        else if (profileInfo?.isPremiumUser && jobList.length >= 10 && profileInfo?.membershipType === 'Teams') {
+            toast({
+                variant:'destructive',
+                title: "You have reached the limit of job posting",
+                description: "please opt for premium plan to post more jobs",
+            })
+            return;
+        }
+        setshowJobDialog(true)
+    }
+
 
     return (
         <div className="">
             <Button
-                onClick={() => setshowJobDialog(true)}
+                onClick={handleAddNewJob}
                 className="disabled:opactiy-60 flex h-11 items-center justify-center px-5 mt-8">
                 Post a new job
             </Button>

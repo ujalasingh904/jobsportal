@@ -11,7 +11,7 @@ export default function CandidateActivity({ jobList, jobApplicants }: any) {
  
 
     return (
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl ">
             <Tabs defaultValue="Applied" className="w-full">
                 <div className="flex items-baseline dark:border-white justify-between border-b pb-6 pt-24">
                     <h1 className="text-4xl font-bold dark:text-white tracking-tight text-gray-950">
@@ -25,9 +25,9 @@ export default function CandidateActivity({ jobList, jobApplicants }: any) {
                 </div>
                 <div className="pb-24 pt-6">
                     <div className="container mx-auto p-0 space-y-8">
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col ">
                             {uniqueStatusArray.map((status:any) => (
-                                <TabsContent value={status}>
+                                <TabsContent className="space-y-4" value={status}>
                                     {jobList
                                         .filter(
                                             (jobItem:any) =>

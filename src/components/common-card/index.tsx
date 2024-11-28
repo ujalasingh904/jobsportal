@@ -18,7 +18,7 @@ export default function CommonCard({ icon, title, description, footerContent, ap
                         description ? <CardDescription className="mt-3 text-gray-600 j">{description}</CardDescription> : null
                     }
                 </CardHeader>
-                {appliedDate && <CardHeader >
+                {appliedDate && <CardHeader className="dark:text-black" >
                     Applied: {appliedDate}
                 </CardHeader>}
             </div>

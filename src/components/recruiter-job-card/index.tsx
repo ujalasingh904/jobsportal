@@ -26,11 +26,13 @@ export default function RecruiterJobCard({ jobItem, jobApplications }: Recruiter
                 icon={<JobIcon />}
                 title={jobItem?.title}
                 description={jobItem?.description}
-                disabled={jobApplications.filter((item: any) => item.jobID === jobItem?._id).length === 0}
                 footerContent={
                     <Button
                         onClick={() => setShowApplicantsDrawer(true)}
-                        className="flex h-11 items-center justify-center px-5 mt-8">
+                        className="flex h-11 items-center justify-center px-5 mt-8 dark:bg-[#FFFA27]"
+                        disabled={jobApplications.filter((item: any) => item.jobID === jobItem?._id).length === 0}
+                    >
+
                         {
                             jobApplications.filter((item: any) => item.jobID === jobItem?._id).length
                         } applicants

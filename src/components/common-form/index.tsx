@@ -26,7 +26,7 @@ export default function CommonForm({ action,  buttonText, isBtndisabled, formCon
                         id={getCurrentControl.name}
                         value={formData[getCurrentControl.name]}
                         onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-                        className="w-full rounded-md h-[60px] px-4 border bg-gray-100 text-lg outline-none drop-shadow-sm transtion-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg  focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                        className="w-full dark:text-black rounded-md h-[60px] px-4 border bg-gray-300 text-lg outline-none drop-shadow-sm transtion-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg  focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                     />
                 </div>)
                 break;
@@ -34,7 +34,7 @@ export default function CommonForm({ action,  buttonText, isBtndisabled, formCon
             case "file":
                 content = (<Label
                     htmlFor={getCurrentControl.name}
-                    className="flex bg-gray-100 items-center px-3 py-3 mx-auto mt-6 text-center border-2 border-dashed rounded-lg cursor-pointer"
+                    className="flex bg-gray-100 dark:text-black items-center px-3 py-3 mx-auto mt-6 text-center border-2 border-dashed rounded-lg cursor-pointer"
                 >
                     <h2>{getCurrentControl.label}</h2>
                     <Input onChange={handleFileChange} id={getCurrentControl.name} type="file" />
@@ -51,7 +51,7 @@ export default function CommonForm({ action,  buttonText, isBtndisabled, formCon
                         id={getCurrentControl.name}
                         value={formData[getCurrentControl.name]}
                         onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
-                        className="w-full rounded-md h-[60px] px-4 border bg-gray-100 text-lg outline-none drop-shadow-sm transtion-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg  focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+                        className="w-full dark:text-black rounded-md h-[60px] px-4 border bg-gray-100 text-lg outline-none drop-shadow-sm transtion-all duration-200 ease-in-out focus:bg-white focus:drop-shadow-lg  focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                     />
                 </div>)
                 break;

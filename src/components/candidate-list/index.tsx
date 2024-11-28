@@ -134,7 +134,7 @@ export default function CandidateList({ currentCandidateDetails, setCurrentCandi
                         </Button>
                         <Button
                             onClick={() => handleUpdateJobStatus("selected")}
-                            className=" disabled:opacity-65 flex h-11 items-center justify-center px-5"
+                            className=" disabled:opacity-65 dark:opacity-25 flex h-11 items-center justify-center px-5"
                             disabled={
                                 jobApplications
                                     .find(
@@ -163,7 +163,7 @@ export default function CandidateList({ currentCandidateDetails, setCurrentCandi
                         </Button>
                         <Button
                             onClick={() => handleUpdateJobStatus("rejected")}
-                            className=" disabled:opacity-65 flex h-11 items-center justify-center px-5"
+                            className=" disabled:opacity-65 dark:opacity-25 flex h-11 items-center justify-center px-5"
                             disabled={
                                 jobApplications
                                     .find(
