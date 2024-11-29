@@ -1,6 +1,5 @@
 import {
-    Card,
-    CardContent,
+    Card, 
     CardDescription,
     CardFooter,
     CardHeader,

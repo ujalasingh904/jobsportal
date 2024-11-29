@@ -230,7 +230,7 @@ export const filterMenuDataArray = [
 ];
 
 export function formUrlQuery({ params, dataToAdd }:any) {
-  let currentURL = qs.parse(params);
+  const currentURL = qs.parse(params);
 
   if (Object.keys(dataToAdd).length > 0) {
     Object.keys(dataToAdd).map((key) => {

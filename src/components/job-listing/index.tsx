@@ -45,8 +45,7 @@ export default function JobListing({ user, profileInfo, jobList, jobApplications
 
     useEffect(() => {
         setFilterParams(JSON.parse(sessionStorage.getItem("filterParams") || "{}"));
-    },
-        [])
+    },[])
 
     useEffect(() => {
         if (filterParams && Object.keys(filterParams).length > 0) {
@@ -63,7 +62,7 @@ export default function JobListing({ user, profileInfo, jobList, jobApplications
 
 
 
-    const filterMenus = filterMenuDataArray.map((item: any, index: any) => ({
+    const filterMenus = filterMenuDataArray.map((item: any) => ({
         id: item.id,
         label: item.label,
         options: [

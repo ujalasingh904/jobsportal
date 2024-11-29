@@ -5,21 +5,21 @@ import CommonCard from "../common-card";
 import JobIcon from "../job-icon";
 import { Button } from "../ui/button";
 
-function Companies({ jobsList }:any) {
+function Companies({ jobsList }: any) {
   const router = useRouter();
 
   const createUniqueSetOfCompanies = [
     ...new Set(
       jobsList
         .filter(
-          (jobItem:any) =>
+          (jobItem: any) =>
             jobItem?.companyName && jobItem?.companyName.trim() !== ""
         )
-        .map((item:any) => item.companyName)
+        .map((item: any) => item.companyName)
     ),
   ];
 
-  function handleFilterJobsByCompanyName(getCompanyName:any) {
+  function handleFilterJobsByCompanyName(getCompanyName: any) {
     sessionStorage.setItem(
       "filterParams",
       JSON.stringify({
@@ -29,7 +29,7 @@ function Companies({ jobsList }:any) {
 
     router.push("/jobs");
   }
- 
+
 
   return (
     <div className="mx-auto max-w-7xl">
@@ -44,9 +44,10 @@ function Companies({ jobsList }:any) {
             <div className="container mx-auto p-0 space-y-8">
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
                 {createUniqueSetOfCompanies &&
-                createUniqueSetOfCompanies.length > 0 ? (
-                  createUniqueSetOfCompanies.map((companyName) => (
+                  createUniqueSetOfCompanies.length > 0 ? (
+                  createUniqueSetOfCompanies.map((companyName: any, index: Number) => (
                     <CommonCard
+                      key={index}
                       icon={<JobIcon />}
                       title={companyName}
                       footerContent={

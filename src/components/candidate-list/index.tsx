@@ -32,7 +32,7 @@ export default function CandidateList({ currentCandidateDetails, setCurrentCandi
     }
 
     async function handleUpdateJobStatus(getCurrentStatus: any) {
-        let cpyJobApplications = [...jobApplications];
+        const cpyJobApplications = [...jobApplications];
         const indexOfCurrentJobApplicant = cpyJobApplications.findIndex((item: any) => item.candidateUserID === currentCandidateDetails?.userId);
 
         const jobApplicantsToUpdate = {

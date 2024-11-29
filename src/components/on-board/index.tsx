@@ -30,9 +30,10 @@ export default function OnBoard() {
     }
 
     async function handleUploadToSupabase() {
+        if (!file) return;
         const { data, error } = await supabaseClient.storage
             .from("job-portal-public")
-            .upload(`/public/${file?.name}`, file,
+            .upload(`/public/${file.name}`, file,
                 {
                     cacheControl: '3600',
                     upsert: false
@@ -118,6 +119,7 @@ export default function OnBoard() {
                         buttonText={'onboard as a recruiter'}
                         formData={recruiterFormData}
                         setFormData={setRecruiterFormData}
+                        handleFileChange={() => { }}
                         isBtndisabled={!handleRecruiterFormValid()}
                         action={createProfile}
                     />

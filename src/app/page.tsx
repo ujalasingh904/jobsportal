@@ -2,6 +2,7 @@ import { fetchProfileAction } from "@/actions";
 import HomepageButtonControls from "@/components/homepage-button-controls";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Image from 'next/image';
 
 export default async function page() {
 
@@ -34,7 +35,7 @@ export default async function page() {
                     </div>
                 </section>
                 <section className="relative w-full lg:w-[50%] flex items-center justify-end">
-                    <img
+                    <Image
                         src="https://utfs.io/f/4c9f7186-8ad0-4680-aece-a5abea608705-k6t10e.png"
                         alt="Jobs Portal"
                         className="h-full w-full object-contain z-10"

@@ -9,6 +9,7 @@ import { CirclePlus, Heart } from "lucide-react";
 import { Input } from "../ui/input";
 import { createClient } from "@supabase/supabase-js";
 import { createFeedPostAction, updateFeedPostAction } from "@/actions";
+import Image from "next/image";
 
 const supabaseClient = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || '',
@@ -73,7 +74,7 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
     }
 
     async function handleUpdateFeedPostLikes(CurrentfeedPostItem: any) {
-        let cpyLikesFromCurrentFeedPostItem = [...CurrentfeedPostItem?.likes];
+        const cpyLikesFromCurrentFeedPostItem = [...CurrentfeedPostItem?.likes];
         const index = cpyLikesFromCurrentFeedPostItem.findIndex(
             (likeItem: any) => likeItem.reactorUserId === user?.id);
 
@@ -114,7 +115,7 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
                                     className="group relative -mx-4 p-6 rounded-3xl bg-gray-100 hover:bg-white hover:shadow-2xl cursor-auto shadow-2xl shadow-transparent gap-8 flex"
                                 >
                                     <div className="sm:w-2/6 rounded-3xl overflow-hidden transition-all duration-500 group-hover:rounded-xl">
-                                        <img
+                                        <Image
                                             src={feedPostItem?.image}
                                             alt="Post"
                                             className="h-80 w-full object-cover object-top transition duration-500 group-hover:scale-105"

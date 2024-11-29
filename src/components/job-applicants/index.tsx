@@ -11,7 +11,6 @@ interface JobApplicantsProps {
     setShowCurrentCandidateDetailsModal: React.Dispatch<React.SetStateAction<boolean>>;
     currentCandidateDetails: any;
     setCurrentCandidateDetails: React.Dispatch<React.SetStateAction<any>>;
-    jobItem: any;
     jobApplications: any;
 }
 
@@ -22,7 +21,6 @@ export default function JobApplicants({
     setShowCurrentCandidateDetailsModal,
     currentCandidateDetails,
     setCurrentCandidateDetails,
-    jobItem,
     jobApplications, }: JobApplicantsProps) {
 
     return (
