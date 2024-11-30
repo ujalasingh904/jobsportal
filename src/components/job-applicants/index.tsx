@@ -11,8 +11,7 @@ interface JobApplicantsProps {
     setShowCurrentCandidateDetailsModal: React.Dispatch<React.SetStateAction<boolean>>;
     currentCandidateDetails: any;
     setCurrentCandidateDetails: React.Dispatch<React.SetStateAction<any>>;
-    jobApplications: any;
-}
+    jobApplications: any; }
 
 export default function JobApplicants({
     showApplicantsDrawer,
@@ -21,7 +20,8 @@ export default function JobApplicants({
     setShowCurrentCandidateDetailsModal,
     currentCandidateDetails,
     setCurrentCandidateDetails,
-    jobApplications, }: JobApplicantsProps) {
+    jobApplications
+ }: JobApplicantsProps) {
 
     return (
         <Drawer open={showApplicantsDrawer} onOpenChange={setShowApplicantsDrawer}>

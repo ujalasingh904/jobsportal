@@ -47,8 +47,7 @@ export default function RecruiterJobCard({ jobItem, jobApplications }: Recruiter
                     setShowCurrentCandidateDetailsModal
                 }
                 currentCandidateDetails={currentCandidateDetails}
-                setCurrentCandidateDetails={setCurrentCandidateDetails}
-                jobItem={jobItem}
+                setCurrentCandidateDetails={setCurrentCandidateDetails} 
                 jobApplications={jobApplications.filter(
                     (jobApplicantItem: any) => jobApplicantItem.jobID === jobItem?._id
                 )}
