@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import Header from '../header';
 import { currentUser } from '@clerk/nextjs/server';
 import { fetchProfileAction } from '@/actions';
