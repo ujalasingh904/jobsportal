@@ -38,7 +38,9 @@ export default function RootLayout({
             <CommonLayout
               attribute="class"
               defaultTheme="system"
-              children={children} />
+            >
+              {children}
+            </CommonLayout>
           </Suspense>
           <Toaster />
         </body>

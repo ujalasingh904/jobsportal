@@ -34,7 +34,7 @@ export default function Header({ user, profileInfo }: any) {
         {
             label: "Activity",
             path: "/activity",
-            show: value?.role === 'candidate'
+            show: value?.role === 'candidate' 
         },
         {
             label: "Feed",
@@ -44,7 +44,7 @@ export default function Header({ user, profileInfo }: any) {
         {
             label: "Companies",
             path: "/companies",
-            show: value?.role === 'candidate'
+            show: value?.role === 'candidate' 
         },
         {
             label: "Jobs",

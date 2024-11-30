@@ -10,7 +10,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes"
 export async function CommonLayout({ children, ...props }: any) {
 
     const user = await currentUser();
-    const profileInfo = fetchProfileAction(user?.id)
+    const profileInfo =  fetchProfileAction(user?.id)
 
     return (
         <NextThemesProvider {...props}>
