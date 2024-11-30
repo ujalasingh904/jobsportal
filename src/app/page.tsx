@@ -39,6 +39,8 @@ export default async function page() {
                         src="https://utfs.io/f/4c9f7186-8ad0-4680-aece-a5abea608705-k6t10e.png"
                         alt="Jobs Portal"
                         className="h-full w-full object-contain z-10"
+                        width={500}
+                        height={500}
                     />
                 </section>
             </div>
