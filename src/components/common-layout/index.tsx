@@ -5,14 +5,10 @@ import { fetchProfileAction } from '@/actions';
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 
-interface CommonLayoutProps {
-    children: ReactNode;
 
 
-}
 
-
-export async function CommonLayout({ children, ...props }: CommonLayoutProps) {
+export async function CommonLayout({ children, ...props }: any) {
 
     const user = await currentUser();
     const profileInfo = fetchProfileAction(user?.id)
@@ -20,7 +16,6 @@ export async function CommonLayout({ children, ...props }: CommonLayoutProps) {
     return (
         <NextThemesProvider {...props}>
             <div className="mx-auto max-w-7xl p-6 lg:px-8">
-                {/* header component */}
                 <Header
                     profileInfo={profileInfo}
                     user={JSON.parse(JSON.stringify(user))}
