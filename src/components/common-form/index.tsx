@@ -2,15 +2,8 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
-interface FormControl {
-    componentType: string;
-    disabled?: boolean;
-    placeholder?: string;
-    name: string;
-    label?: string;
-}
 
-export default function CommonForm({ action,  buttonText, isBtndisabled, formControls, btnType, formData, setFormData, handleFileChange }: { action: () => Promise<void>, buttonText: string, isBtndisabled: boolean, formControls: FormControl[], btnType?: "button" | "reset" | "submit", formData: any,  setFormData: (data: any) => void, handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
+export default function CommonForm({ action,  buttonText, isBtndisabled, formControls, btnType, formData, setFormData, handleFileChange } :any) {
 
     function renderInputByComponentType(getCurrentControl: any) {
         let content = null;
@@ -63,7 +56,7 @@ export default function CommonForm({ action,  buttonText, isBtndisabled, formCon
     return (
         <form action={action}>
             {
-                formControls.map((control, index) => (
+                formControls.map((control:any, index:any) => (
                     <div key={index}>
                         {renderInputByComponentType(control)}
                     </div>
