@@ -45,7 +45,7 @@ function Companies({ jobsList }: any) {
               <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
                 {createUniqueSetOfCompanies &&
                   createUniqueSetOfCompanies.length > 0 ? (
-                  createUniqueSetOfCompanies.map((companyName: any, index: Number) => (
+                  createUniqueSetOfCompanies.map((companyName: any, index: number) => (
                     <CommonCard
                       key={index}
                       icon={<JobIcon />}

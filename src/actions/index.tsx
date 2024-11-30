@@ -40,7 +40,7 @@ export async function fetchJobsForRecuriterAction(id: any) {
 
 export async function fetchJobsForCandidateAction(filterParams: { [key: string]: string } = {}) {
     await connecToDb();
-    let updatedParams: { [key: string]: { $in: string[] } } = {};
+    const updatedParams: { [key: string]: { $in: string[] } } = {};
     Object.keys(filterParams).forEach((filterKey) => {
         updatedParams[filterKey] = { $in: filterParams[filterKey].split(",") }
     })

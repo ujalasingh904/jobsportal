@@ -31,7 +31,7 @@ export default function OnBoard() {
 
     async function handleUploadToSupabase() {
         if (!file) return;
-        const { data, error } = await supabaseClient.storage
+        const { data } = await supabaseClient.storage
             .from("job-portal-public")
             .upload(`/public/${file.name}`, file,
                 {

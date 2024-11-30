@@ -44,7 +44,7 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
     }
 
     async function handleUploadImageToSupabase() {
-        const { data, error } = await supabaseClient.storage
+        const { data} = await supabaseClient.storage
             .from("job-portal-public").upload(`/public/${imageData?.name}`, imageData, {
                 cacheControl: "3600",
                 upsert: false
