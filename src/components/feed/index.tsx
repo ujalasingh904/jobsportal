@@ -331,6 +331,8 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
                                         <Image
                                             src={feedPostItem?.image || ""}
                                             alt="Post"
+                                            width={500}
+                                            height={500}
                                             className="h-80 w-full object-cover object-top transition duration-500 group-hover:scale-105"
                                         />
                                     </div>

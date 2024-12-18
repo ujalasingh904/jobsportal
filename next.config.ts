@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["utfs.io"], // Add the domain here
+    domains: ["utfs.io","gdktyhfsrfktbnhtifro.supabase.co"], // Add the domain here
   },
 };
 
