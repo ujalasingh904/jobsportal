@@ -5,7 +5,7 @@ import CommonCard from "../common-card"
 import JobIcon from "../job-icon"
 import { Button } from "../ui/button"
 import {
-    Drawer,  DrawerContent, DrawerDescription,  DrawerHeader, DrawerTitle,
+    Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
 import { createJobApplicationAction } from "@/actions"
@@ -20,7 +20,7 @@ export default function CandidateJobCard({ jobItem, profileInfo, jobApplications
 
 
 
-    async function handleJobApply() { 
+    async function handleJobApply() {
 
         console.log('jobApplications', jobApplications)
         console.log('profileInfo', profileInfo?.isPremiumUser)
@@ -92,7 +92,8 @@ export default function CandidateJobCard({ jobItem, profileInfo, jobApplications
                                     onClick={handleJobApply}
                                     className="disabled:opacity-65 dark:disabled:opacity-30  flex h-11 items-center justify-center px-5 mt-8">{
                                         jobApplications.map((item: any) => item.jobID).includes(jobItem?._id) ? 'Applied' : 'Apply Now'
-                                    }</Button>
+                                    }
+                                </Button>
 
                                 <Button className=" flex h-11 items-center justify-center px-5 mt-8" onClick={() => setShowJobDetailsDrawer(false)}> Cancel  </Button>
                             </div>
