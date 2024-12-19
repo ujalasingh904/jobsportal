@@ -1,3 +1,5 @@
+'use client'
+
 import { getCandidateDetailsByIDAction, updateJobApplicationStatusAction } from "@/actions";
 import { Button } from "../ui/button";
 import { Dialog, DialogContent } from "../ui/dialog";
