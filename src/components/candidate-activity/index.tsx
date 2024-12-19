@@ -26,8 +26,8 @@ export default function CandidateActivity({ jobList, jobApplicants }: any) {
                 <div className="pb-24 pt-6">
                     <div className="container mx-auto p-0 space-y-8">
                         <div className="flex flex-col ">
-                            {uniqueStatusArray.map((status:any) => (
-                                <TabsContent className="space-y-4" value={status}>
+                            {uniqueStatusArray.map((status:any,index:any) => (
+                                <TabsContent key={index} className="space-y-4" value={status}>
                                     {jobList
                                         .filter(
                                             (jobItem:any) =>
@@ -41,8 +41,9 @@ export default function CandidateActivity({ jobList, jobApplicants }: any) {
                                                             jobItem._id === filteredItemByStatus.jobID
                                                     ) > -1
                                         )
-                                        .map((finalFilteredItem:any) => (
+                                        .map((finalFilteredItem:any,index:any) => (
                                             <CommonCard
+                                                key={index}
                                                 icon={<JobIcon />}
                                                 title={finalFilteredItem?.title}
                                                 description={finalFilteredItem?.companyName}

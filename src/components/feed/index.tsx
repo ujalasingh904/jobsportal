@@ -218,7 +218,7 @@ const supabaseClient = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_API_KEY || ''
 );
 
-export default function Feed({ user, profileInfo, allFeedPosts }: any) {
+export default function Feed({ user, profileInfo, allFeedPosts }: any) { 
     const [showPostDialog, setShowPostDialog] = useState(false);
     const [formData, setFormData] = useState({
         message: "",
