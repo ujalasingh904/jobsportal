@@ -1,4 +1,4 @@
-'use client' //2
+ 
 
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
