@@ -41,13 +41,16 @@ export async function fetchJobsForRecuriterAction(id: any) {
 export async function fetchJobsForCandidateAction(filterParams: { [key: string]: string } = {}) {
     await connecToDb();
     const updatedParams: { [key: string]: { $in: string[] } } = {};
-    Object.keys(filterParams).forEach((filterKey) => {
+    Object.keys(await filterParams).forEach((filterKey) => {
         updatedParams[filterKey] = { $in: filterParams[filterKey].split(",") }
     })
-    const result = await Job.find(filterParams && Object.keys(filterParams).length > 0 ? updatedParams : {});
+    const result = await Job.find(filterParams && Object.keys(await filterParams).length > 0 ? updatedParams : {});
 
     return JSON.parse(JSON.stringify(result));
 }
+
+
+
 
 export async function createJobApplicationAction(data: any, pathToRevalidate: any) {
     await connecToDb();
