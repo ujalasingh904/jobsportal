@@ -1,3 +1,4 @@
+'use client' //4
 import { Fragment } from "react";
 
 function JobIcon() {

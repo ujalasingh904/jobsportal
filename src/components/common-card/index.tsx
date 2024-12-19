@@ -1,3 +1,5 @@
+'use client' //1
+
 import {
     Card, 
     CardDescription,
