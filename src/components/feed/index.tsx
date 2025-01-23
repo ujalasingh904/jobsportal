@@ -45,10 +45,7 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
         }
     }
 
-    const supabaseClient = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-        process.env.NEXT_PUBLIC_SUPABASE_API_KEY || ''
-    );
+     
 
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_API_KEY) {
         console.warn("Supabase environment variables are not set!");
