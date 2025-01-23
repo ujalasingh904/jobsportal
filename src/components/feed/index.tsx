@@ -85,8 +85,8 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
         if (imageData) {
             console.log("imageData from useEffect", imageData);
             handleUploadImageToSupabase()
-        };
-    }, [imageData]);
+        }
+    }, [imageData])
 
     async function handleSaveFeedPost() {
         await createFeedPostAction(
