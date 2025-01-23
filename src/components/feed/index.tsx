@@ -16,7 +16,7 @@ const supabaseClient = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_API_KEY || ''
 );
 
-export default function Feed({ user, profileInfo, allFeedPosts }: any) { 
+export default function Feed({ user, profileInfo, allFeedPosts }: any) {
     const [showPostDialog, setShowPostDialog] = useState(false);
     const [formData, setFormData] = useState({
         message: "",
@@ -27,12 +27,15 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
     function handleFileOnChange(e: any) {
         e.preventDefault();
         setImageData(e.target.files[0] || null);
+        console.log("imageData from handleFileOnChange", e.target.files[0]);
     }
 
     function handleFetchImagePublicUrl(getData: any) {
         const { data } = supabaseClient.storage
             .from("job-portal-public")
             .getPublicUrl(getData?.path || "");
+
+        console.log("data from handleFetchImagePublicUrl", data);
 
         if (data) {
             setFormData((prev) => ({
@@ -42,19 +45,50 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
         }
     }
 
-    async function handleUploadImageToSupabase() {
-        const { data } = await supabaseClient.storage
-            .from("job-portal-public")
-            .upload(`/public/${imageData?.name || "default-name"}`, imageData, {
-                cacheControl: "3600",
-                upsert: false,
-            });
+    const supabaseClient = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+        process.env.NEXT_PUBLIC_SUPABASE_API_KEY || ''
+    );
 
-        if (data) handleFetchImagePublicUrl(data);
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_API_KEY) {
+        console.warn("Supabase environment variables are not set!");
     }
 
+    async function handleUploadImageToSupabase() {
+        if (!imageData) {
+            console.error("No image data provided.");
+            return;
+        }
+
+        try {
+            const { data, error } = await supabaseClient.storage
+                .from("job-portal-public")
+                .upload(`/public/${imageData?.name || "default-name"}`, imageData, {
+                    cacheControl: "3600",
+                    upsert: false,
+                });
+
+            if (error) {
+                console.error("Error uploading image to Supabase:", error.message);
+                return;
+            }
+
+            console.log("Uploaded image data:", data);
+
+            if (data) {
+                handleFetchImagePublicUrl(data); 
+            }
+        } catch (err) {
+            console.error("Unexpected error during upload:", err);
+        }
+    }
+
+
     useEffect(() => {
-        if (imageData) handleUploadImageToSupabase();
+        if (imageData) {
+            console.log("imageData from useEffect", imageData);
+            handleUploadImageToSupabase()
+        };
     }, [imageData]);
 
     async function handleSaveFeedPost() {
@@ -71,6 +105,8 @@ export default function Feed({ user, profileInfo, allFeedPosts }: any) {
             },
             '/feed'
         );
+
+        console.log("formData from handleSaveFeedPost", formData);
 
         setShowPostDialog(false);
         setFormData({

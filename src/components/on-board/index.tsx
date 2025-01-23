@@ -89,41 +89,43 @@ export default function OnBoard() {
         setCurrentTab(value)
     }
 
-    return (
-        <div className="bg-white">
-            <Tabs value={currentTab} onValueChange={handleTabChange}>
-                <div className="w-full">
-                    <div className="flex items-baseline justify-between border-b pb-6 pt-24">
-                        <h1 className="text-4xl font-bold tracking-tight text-gray-900">Welcome to onboard</h1>
+    console.log("candidateFormData", candidateFormData)
 
-                        <TabsList>
-                            <TabsTrigger value="candidate">Candidate</TabsTrigger>
-                            <TabsTrigger value="recruiter">Recruiter</TabsTrigger>
-                        </TabsList>
-                    </div>
+    return (
+        <div className="bg-white dark:bg-transparent">
+            <Tabs value={currentTab} onValueChange={handleTabChange}>
+            <div className="w-full">
+                <div className="flex items-baseline justify-between border-b pb-6 pt-24">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Welcome to onboard</h1>
+
+                <TabsList>
+                    <TabsTrigger value="candidate">Candidate</TabsTrigger>
+                    <TabsTrigger value="recruiter">Recruiter</TabsTrigger>
+                </TabsList>
                 </div>
-                <TabsContent value="candidate">
-                    <CommonForm
-                        formControls={candidateOnboardFormControls}
-                        buttonText={'onboard as a candidate'}
-                        formData={candidateFormData}
-                        setFormData={setCandidateFormData}
-                        handleFileChange={handleFileChange}
-                        action={createProfile}
-                        isBtndisabled={!handleCandidateFormValid()}
-                    />
-                </TabsContent>
-                <TabsContent value="recruiter">
-                    <CommonForm
-                        formControls={recruiterOnboardFormControls}
-                        buttonText={'onboard as a recruiter'}
-                        formData={recruiterFormData}
-                        setFormData={setRecruiterFormData}
-                        handleFileChange={() => { }}
-                        isBtndisabled={!handleRecruiterFormValid()}
-                        action={createProfile}
-                    />
-                </TabsContent>
+            </div>
+            <TabsContent value="candidate">
+                <CommonForm
+                formControls={candidateOnboardFormControls}
+                buttonText={'onboard as a candidate'}
+                formData={candidateFormData}
+                setFormData={setCandidateFormData}
+                handleFileChange={handleFileChange}
+                action={createProfile}
+                isBtndisabled={!handleCandidateFormValid()}
+                />
+            </TabsContent>
+            <TabsContent value="recruiter">
+                <CommonForm
+                formControls={recruiterOnboardFormControls}
+                buttonText={'onboard as a recruiter'}
+                formData={recruiterFormData}
+                setFormData={setRecruiterFormData}
+                handleFileChange={() => { }}
+                isBtndisabled={!handleRecruiterFormValid()}
+                action={createProfile}
+                />
+            </TabsContent>
             </Tabs>
 
         </div>

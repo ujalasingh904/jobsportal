@@ -41,16 +41,14 @@ export async function fetchJobsForRecuriterAction(id: any) {
 export async function fetchJobsForCandidateAction(filterParams: { [key: string]: string } = {}) {
     await connecToDb();
     const updatedParams: { [key: string]: { $in: string[] } } = {};
-    Object.keys(await filterParams).forEach((filterKey) => {
+    await Promise.resolve();  
+    Object.keys(filterParams).forEach((filterKey) => {
         updatedParams[filterKey] = { $in: filterParams[filterKey].split(",") }
-    })
-    const result = await Job.find(filterParams && Object.keys(await filterParams).length > 0 ? updatedParams : {});
+    });
+    const result = await Job.find(filterParams && Object.keys(filterParams).length > 0 ? updatedParams : {});
 
     return JSON.parse(JSON.stringify(result));
 }
-
-
-
 
 export async function createJobApplicationAction(data: any, pathToRevalidate: any) {
     await connecToDb();
@@ -151,8 +149,8 @@ export async function createStripePaymentAction(data: any) {
         line_items: data?.lineItems,
         mode: 'subscription',
         billing_address_collection: "required",
-        success_url: `${process.env.URL}/membership" + "?status=success`,
-        cancel_url: `${process.env.URL}/membership" + "?status=cancel`,
+        success_url: `${process.env.URL}/membership` + "?status=success",
+        cancel_url: `${process.env.URL}/membership` + "?status=cancel",
     });
 
     return {
